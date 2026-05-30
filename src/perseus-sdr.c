@@ -31,6 +31,7 @@
 #define __USE_GNU
 #if !defined(_WIN32)
 #include <dlfcn.h>
+#include <unistd.h>
 #else
 #include <windows.h>
 #endif
@@ -715,7 +716,11 @@ int	perseus_stop_async_input(perseus_descr *descr)
 
 	// wait for queue cancel to complete
 	while (perseus_input_queue_completed(queue)==FALSE) {
+#ifdef _WIN32
 	    Sleep(1);
+#else
+	    usleep(1000);
+#endif
 	}
 
 	// // print some statistics...

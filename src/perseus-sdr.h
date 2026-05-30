@@ -348,13 +348,13 @@ int		perseus_is_preserie(perseus_descr *descr, int *flag);
 	{ \
       if (perseus_dbg_level >= level) {\
            fprintf(stderr, "perseus: "); \
-           fprintf(stderr, format, __VA_ARGS__); \
+           fprintf(stderr, format, ##__VA_ARGS__); \
            fprintf(stderr, "\n"); \
 		} \
 	}
 #define errorset(x, format, ...) \
     ( \
-  	  snprintf(perseus_error_str, sizeof(perseus_error_str) - 1, format, __VA_ARGS__), \
+  	  snprintf(perseus_error_str, sizeof(perseus_error_str) - 1, format, ##__VA_ARGS__), \
 	  ((perseus_dbg_level >= 1)? fprintf(stderr, "perseus error: %s\n", perseus_error_str):0),\
 	  (perseus_error = x)\
 	)
